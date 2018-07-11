@@ -5,7 +5,7 @@ class explorer(character):
 	
 	''' 
 	This is the explorer character code. Currently his abilities are as follows:
-	1. Mine
+	1. Mine - uranium.
 	'''
 
 	def __init__(self, name):				#constructor function
@@ -36,4 +36,5 @@ player = explorer('test')
 while True:
 	z = 0
 	y = int(input("How much: "))
-	print(player.mine(y))
+	player.mine(y)
+	player.mined()
