@@ -23,20 +23,17 @@ class explorer(character):
 		if request:
 			self.uranium_manual  += request						#Stores the amount of uranium requested by the player(all time).
 			self.offset += self.uranium_manual//100					#Offset calculation for the multiplier
-			self.uranium_bonus = self.uranium_manual + math.log(self.offset/10)	#Multiplier for the mined uranium.
-			self.uranium_mined += self.uranium_bonus				#Counts the all time uranium mined.
-			return self.uranium_mined
+			self.uranium_bonus = request + math.log(self.offset/10)			#Multiplier for the mined uranium.
+			self.uranium_mined += self.uranium_bonus				#Maintains the count of all time uranium.
+			return self.uranium_mined						
 	
 	def mined(self):
-		print("You have mined a total of", self.uranium_mined, "uranium")
+		print("You have mined a total of", self.uranium_mined, "uranium")		#Prints total uranium mined ever.
 	
 
+#testing the module~~
 player = explorer('test')
 while True:
-	x = input("yes:")
 	z = 0
-	if x == 'yes':
-		y = int(input("How much: "))
-		print(player.mine(y))
-	else:
-		break
+	y = int(input("How much: "))
+	print(player.mine(y))
