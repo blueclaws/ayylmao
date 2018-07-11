@@ -1,5 +1,6 @@
 from char import character
 import math
+import time
 
 class explorer(character):
 	
@@ -15,7 +16,9 @@ class explorer(character):
 		self.uranium_manual = 0				#count of manual requested uranium.
 		self.uranium_bonus = 0				#adds the multiplier to the currently mined uranium.
 		self.uranium_mined = 0				#Total life time mined uranium.
-		
+		self.o2_counter = 1				#Offset the counter for the oxygen content.
+		self.oxygen = 10				#max amount of oxygen player has.
+		self.start_time = time.time()			#Initialse start_time to the time when player beings the game.
 	
 	
 	def mine(self, request):
@@ -25,10 +28,27 @@ class explorer(character):
 			self.offset += self.uranium_manual//100					#Offset calculation for the multiplier
 			self.uranium_bonus = request + math.log(self.offset/10)			#Multiplier for the mined uranium.
 			self.uranium_mined += self.uranium_bonus				#Maintains the count of all time uranium.
+			self.respire()
+			
+			if self.oxygen <= 0:							# If oxygen level is 0; you die.
+				print("Oxygen reached 0. YOU DIED.")
 			return self.uranium_mined						
+
+	def respire(self):
+		now = time.time()								#intialise the 'now' to the time when this function is called
+		
+		if now > self.start_time:							#If the time when function is called is greater than the time when the game has started,
+				self.oxygen -= math.log(self.o2_counter)			#then this conditional code is executed; reduces the oxgen amount accordingly.	
+				self.o2_counter += 1						#Increment the counter by one every time.
+
+				if self.oxygen >= 0:						# Prints oxygen level only when alive.
+					print("Your oxygen level is: ", self.oxygen)		
+				
+			
 	
 	def mined(self):
-		print("You have mined a total of", self.uranium_mined, "uranium")		#Prints total uranium mined ever.
+		if self.oxygen > 0:									#Only when alive.
+			print("You have mined a total of", self.uranium_mined, "uranium")		#Prints total uranium mined ever.
 	
 
 #testing the module~~
