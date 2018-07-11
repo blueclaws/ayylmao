@@ -1,12 +1,14 @@
 from char import character
 import math
 import time
+import sys
 
 class explorer(character):
 	
 	''' 
 	This is the explorer character code. Currently his abilities are as follows:
 	1. Mine - uranium.
+	2. Respiration.
 	'''
 
 	def __init__(self, name):				#constructor function
@@ -32,6 +34,7 @@ class explorer(character):
 			
 			if self.oxygen <= 0:							# If oxygen level is 0; you die.
 				print("Oxygen reached 0. YOU DIED.")
+				sys.exit()
 			return self.uranium_mined						
 
 	def respire(self):
