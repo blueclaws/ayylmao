@@ -10,54 +10,79 @@ class explorer(character):
 	1. Mine - uranium.
 	2. Respiration.
 	'''
+	#constructor function
+	#sets the name of the character
+	#offsets the numerator for the multiplier calculation.
+	#default uranium count is 0.
+	#offsets the numerator for the multiplier calculation.
+	#count of manual requested uranium.
+	#adds the multiplier to the currently mined uranium.
+	#Total life time mined uranium.
+	#Offset the counter for the oxygen content.
+	#max amount of oxygen player has.
+	#Initialse start_time to the time when player beings the game.
+	def __init__(self, name):
+		self.name = name
+		self.uranium = 0
+		self.offset = 10
+		self.uranium_manual = 0
+		self.uranium_bonus = 0
+		self.uranium_mined = 0
+		self.o2_counter = 1
+		self.oxygen = 10
+		self.start_time = time.time()
 
-	def __init__(self, name):				#constructor function
-		self.name = name				#sets the name of the character
-		self.offset = 10				#offsets the numerator for the multiplier calculation.
-		self.uranium = 0				#default uranium count is 0.
-		self.uranium_manual = 0				#count of manual requested uranium.
-		self.uranium_bonus = 0				#adds the multiplier to the currently mined uranium.
-		self.uranium_mined = 0				#Total life time mined uranium.
-		self.o2_counter = 1				#Offset the counter for the oxygen content.
-		self.oxygen = 10				#max amount of oxygen player has.
-		self.start_time = time.time()			#Initialse start_time to the time when player beings the game.
 
 
 	def mine(self, request):
-
+		#Offset calculation for the multiplier
+		#Multiplier for the mined uranium
+		#Maintains the count of all time uranium.
+		#If and when the request is 1; oxygen consumed
+		#is 0. This is a loophole, to fix this we send
+		#request as 2 whenever player requests 1.
 		if request:
-			self.uranium_manual  += request									#Stores the amount of uranium requested by the player(all time).
-			self.offset += self.uranium_manual//100							#Offset calculation for the multiplier
-			self.uranium_bonus = request + math.log(self.offset/10)			#Multiplier for the mined uranium.
-			self.uranium_mined += self.uranium_bonus						#Maintains the count of all time uranium.
-			if request > 1:													#If and when the request is 1; oxygen consumed
-				self.respire(request)										#is 0. This is a loophole, to fix this we send
-			else:															#request as 2 whenever player requests 1.
+			self.uranium_manual  += request
+			self.offset += self.uranium_manual//100
+			self.uranium_bonus = request + math.log(self.offset/10)
+			self.uranium_mined += self.uranium_bonus
+			if request > 1:
+				self.respire(request)
+			else:
 				self.respire(2)
 
-
-			if self.oxygen <= 0:							# If oxygen level is 0; you die.
+			#If oxygen level is 0; you die.
+			#waits X seconds before exiting the game
+			#Exit the script
+			if self.oxygen <= 0:
 				print("Oxygen reached 0. YOU DIED.")
-				time.sleep(3)								#waits X seconds before exiting the game
-				sys.exit()									#Exit the script
+				time.sleep(3)
+				sys.exit()
 			return self.uranium_mined
 
 	def respire(self, req):
-		now = time.time()													#intialise the 'now' to the time when this function is called
+		#intialise the 'now' to the time when this function is called
+		#If the time when function is called is greater than the time when the game has started,
+		#then this conditional code is executed; reduces the oxgen amount accordingly.
+		#Increment the counter by one every time.
+		# Prints oxygen level only when alive.
 
-		if now > self.start_time:											#If the time when function is called is greater than the time when the game has started,
-				self.oxygen -= math.log(self.o2_counter)*math.log(req, 10)	#then this conditional code is executed; reduces the oxgen amount accordingly.
-				self.o2_counter += 1										#Increment the counter by one every time.
+		now = time.time()
 
-				if self.oxygen >= 0:										# Prints oxygen level only when alive.
+		if now > self.start_time:
+				self.oxygen -= math.log(self.o2_counter)*math.log(req, 10)
+				self.o2_counter += 1
+				if self.oxygen >= 0:
 					#print("Your oxygen level is: ", self.oxygen, "   ", math.log(req, 10)) Debug oxygen consumption
 					print("Your oxygen level is: ", self.oxygen)
 
 
 
 	def mined(self):
-		if self.oxygen > 0:															#Only when alive.
-			print("You have mined a total of", self.uranium_mined, "uranium")		#Prints total uranium mined ever.
+		#Only when alive.
+		#Prints total uranium mined ever.
+		if self.oxygen > 0:
+			print("You have mined a total of", self.uranium_mined, "uranium")
 
 
 #testing the module~~
