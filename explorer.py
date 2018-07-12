@@ -38,7 +38,7 @@ class explorer(character):
 
 			if self.oxygen <= 0:							# If oxygen level is 0; you die.
 				print("Oxygen reached 0. YOU DIED.")
-				time.sleep(5)								#waits X seconds before exiting the game
+				time.sleep(3)								#waits X seconds before exiting the game
 				sys.exit()									#Exit the script
 			return self.uranium_mined
 
@@ -46,7 +46,7 @@ class explorer(character):
 		now = time.time()													#intialise the 'now' to the time when this function is called
 
 		if now > self.start_time:											#If the time when function is called is greater than the time when the game has started,
-				self.oxygen -= math.log(self.o2_counter)*math.log(req, 10)			#then this conditional code is executed; reduces the oxgen amount accordingly.
+				self.oxygen -= math.log(self.o2_counter)*math.log(req, 10)	#then this conditional code is executed; reduces the oxgen amount accordingly.
 				self.o2_counter += 1										#Increment the counter by one every time.
 
 				if self.oxygen >= 0:										# Prints oxygen level only when alive.
