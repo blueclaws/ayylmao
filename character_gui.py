@@ -38,7 +38,7 @@ class explorer(character, Frame):
         disp0.grid(column=0, row=2)
 
         disp01 = ttk.Label(root, textvariable=self.disper)
-        self.disper.set("0")
+        self.disper.set("10")
         disp01.grid(column=1, row=2)
 
         disp1 = ttk.Label(root, textvariable=self.popper)
