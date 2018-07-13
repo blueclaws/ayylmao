@@ -13,7 +13,7 @@ class explorer(character, Frame):
         self.uranium_bonus = 0
         self.uranium_mined = 0
         self.o2_counter = 1
-        self.oxygen = 10
+        self.oxygen = 100
         self.start_time = time.time()
         Frame.__init__(self, master)
         self.master = master
@@ -50,7 +50,7 @@ class explorer(character, Frame):
 
     def mine(self):
         self.uranium_manual  += 1
-        self.offset += self.uranium_manual//100
+        self.offset += self.uranium_manual//50
         self.uranium_bonus = 1 + math.log(self.offset/10)
         self.uranium_mined += self.uranium_bonus
         y = self.respire(2)
