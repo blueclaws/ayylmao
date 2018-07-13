@@ -21,23 +21,30 @@ class explorer(character, Frame):
         self.y = 0
         self.disper = StringVar()
         self.popper = StringVar()
+        self.b = 0
         self.window_maker()
 
     def window_maker(self):
         self.master.title("Ayylmao - the game")
         self.master.geometry("400x500")
 
-        b = ttk.Button(root, text = "Mine", command=self.mine)
-        b.grid(column=0, row=0)
+        self.b = ttk.Button(root, text = "Mine", command=self.mine)
+        self.b.grid(column=0, row=0)
 
-        b1 = ttk.Button(root, text = "Mined", command=self.mined)
-        b1.grid(column=1, row=0)
+        #b1 = ttk.Button(root, text = "Mined", command=self.mined)
+        #b1.grid(column=1, row=0)
 
-        disp = ttk.Label(root, textvariable=self.disper)
-        disp.grid(column=1, row=2)
+        disp0 = ttk.Label(root, text="Oxygen level: ")
+        disp0.grid(column=0, row=2)
+
+        disp01 = ttk.Label(root, textvariable=self.disper)
+        disp01.grid(column=1, row=2)
 
         disp1 = ttk.Label(root, textvariable=self.popper)
         disp1.grid(column=1, row=1)
+
+        disp11 = ttk.Label(root, text="Uranium: ")
+        disp11.grid(column=0, row=1)
 
     def mine(self):
         self.uranium_manual  += 1
@@ -50,6 +57,7 @@ class explorer(character, Frame):
             #>>>>>>>>>>>>>>self.disper.set("OwO")
         #return self.uranium_mined
         x = self.uranium_mined
+        self.mined()
 
     def respire(self, req):
 
@@ -64,7 +72,10 @@ class explorer(character, Frame):
 
     def mined(self):
         if self.oxygen <= 0:
-            self.disper.set("Oxygen reached 0. YOU DIED.")
+            self.disper.set(" 0. YOU DIED.")
+            self.b.state(['disabled'])
+        else:
+            self.disper.set(self.oxygen)
 
         self.popper.set(self.uranium_mined)
 

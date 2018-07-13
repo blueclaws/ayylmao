@@ -72,6 +72,7 @@ class explorer(character):
 		if now > self.start_time:
 				self.oxygen -= math.log(self.o2_counter)*math.log(req, 10)
 				self.o2_counter += 1
+
 				if self.oxygen >= 0:
 					#print("Your oxygen level is: ", self.oxygen, "   ", math.log(req, 10)) Debug oxygen consumption
 					print("Your oxygen level is: ", self.oxygen)
