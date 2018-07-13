@@ -58,7 +58,7 @@ class explorer(character):
 				print("Oxygen reached 0. YOU DIED.")
 				time.sleep(3)
 				sys.exit()
-			return self.uranium_mined
+			#return self.uranium_mined
 
 	def respire(self, req):
 		#intialise the 'now' to the time when this function is called
