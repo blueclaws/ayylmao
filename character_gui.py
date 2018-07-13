@@ -66,8 +66,9 @@ class explorer(character, Frame):
         now = time.time()
 
         if now > self.start_time:
-            self.oxygen -= math.log(self.o2_counter)*math.log(req, 10)
             self.o2_counter += 1
+            self.oxygen -= math.log(self.o2_counter)*math.log(req, 10)
+
 
             if self.oxygen >= 0:
                 return self.oxygen
