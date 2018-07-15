@@ -38,7 +38,7 @@ class explorer(character, Frame):
         disp0.grid(column=0, row=2)
 
         disp01 = ttk.Label(root, textvariable=self.disper)
-        self.disper.set("10")
+        self.disper.set("100")
         disp01.grid(column=1, row=2)
 
         disp1 = ttk.Label(root, textvariable=self.popper)
@@ -78,9 +78,9 @@ class explorer(character, Frame):
             self.disper.set(" 0. YOU DIED.")
             self.b.state(['disabled'])
         else:
-            self.disper.set(self.oxygen)
+            self.disper.set(int(self.oxygen))
 
-        self.popper.set(self.uranium_mined)
+        self.popper.set(int(self.uranium_mined))
 
 
 root = Tk()
