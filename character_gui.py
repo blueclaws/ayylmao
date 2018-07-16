@@ -1,20 +1,21 @@
 from tkinter import *
 from tkinter import ttk
-from char import character
+import char
 import math, time
 
-class explorer(character, Frame):
+class explorer(char.character, Frame):
 
     def __init__(self, master, name):
-        self.name = name
+        char.character.__init__(self, name)
+        #self.name = name
         self.uranium = 0
-        self.offset = 10
+        #self.offset = 10
         self.uranium_manual = 0
         self.uranium_bonus = 0
         self.uranium_mined = 0
-        self.o2_counter = 1
-        self.oxygen = 100
-        self.start_time = time.time()
+        #self.o2_counter = 1
+        #self.oxygen = 100
+        #self.start_time = time.time()
         Frame.__init__(self, master)
         self.master = master
         self.x = 0
@@ -54,24 +55,20 @@ class explorer(character, Frame):
         self.uranium_bonus = 1 + math.log(self.offset/10)
         self.uranium_mined += self.uranium_bonus
         y = self.respire(2)
-        #if self.oxygen <= 0:
-            #print("Oxygen reached 0. YOU DIED.")
-            #>>>>>>>>>>>>>>self.disper.set("OwO")
-        #return self.uranium_mined
         x = self.uranium_mined
         self.mined()
 
-    def respire(self, req):
-
-        now = time.time()
-
-        if now > self.start_time:
-            self.o2_counter += 1
-            self.oxygen -= math.log(self.o2_counter)*math.log(req, 10)
-
-
-            if self.oxygen >= 0:
-                return self.oxygen
+#    def respire(self, req):
+#
+#        now = time.time()
+#
+#        if now > self.start_time:
+#            self.o2_counter += 1
+#            self.oxygen -= math.log(self.o2_counter)*math.log(req, 10)
+#
+#
+#            if self.oxygen >= 0:
+#                return self.oxygen
 
     def mined(self):
         if self.oxygen <= 0:
