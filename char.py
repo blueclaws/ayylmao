@@ -1,3 +1,6 @@
+##
+# No longer maintained.
+##
 '''
 This is character code.
 
@@ -25,10 +28,10 @@ class character:
 				return self.oxygen
 
 	def mine(self):
-		 self.uranium_manual  += 1
-		 self.offset += self.uranium_manual//50
-		 self.uranium_bonus = 1 + math.log(self.offset/10)
-		 self.uranium_mined += self.uranium_bonus
-		 y = self.respire(2)
-		 x = self.uranium_mined
-		 self.mined()
+		self.uranium_manual  += 1
+		self.offset += self.uranium_manual//50
+		self.uranium_bonus = 1 + math.log(self.offset/10)
+		self.uranium_mined += self.uranium_bonus
+		y = self.respire(2)
+		x = self.uranium_mined
+		self.mined()

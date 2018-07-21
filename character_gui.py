@@ -1,3 +1,6 @@
+##
+# No longer maitained
+##
 from tkinter import *
 from tkinter import ttk
 import char
@@ -31,44 +34,30 @@ class explorer(char.character, Frame):
 
         self.b = ttk.Button(root, text = "Mine", command=self.mine)
         self.b.grid(column=0, row=0)
+        self.b.columnconfigure(1, weight=1)
+
 
         #b1 = ttk.Button(root, text = "Mined", command=self.mined)
         #b1.grid(column=1, row=0)
 
-        disp0 = ttk.Label(root, text="Oxygen level: ")
-        disp0.grid(column=0, row=2)
-
-        disp01 = ttk.Label(root, textvariable=self.disper)
-        self.disper.set(self.oxygen)
-        disp01.grid(column=1, row=2)
-
-        disp1 = ttk.Label(root, textvariable=self.popper)
-        disp1.grid(column=1, row=1)
-
-        disp11 = ttk.Label(root, text="Uranium: ")
+        self.disp11 = ttk.Label(root, text="Uranium: ")
         self.popper.set(self.uranium_mined)
-        disp11.grid(column=0, row=1)
+        self.disp11.grid(column=0, row=1, sticky=E)
+        self.disp11.columnconfigure(1, weight=3)
 
-    def mine(self):
-        self.uranium_manual  += 1
-        self.offset += self.uranium_manual//50
-        self.uranium_bonus = 1 + math.log(self.offset/10)
-        self.uranium_mined += self.uranium_bonus
-        y = self.respire(2)
-        x = self.uranium_mined
-        self.mined()
+        self.disp1 = ttk.Label(root, textvariable=self.popper)
+        self.disp1.grid(column=1, row=1)
 
-#    def respire(self, req):
-#
-#        now = time.time()
-#
-#        if now > self.start_time:
-#            self.o2_counter += 1
-#            self.oxygen -= math.log(self.o2_counter)*math.log(req, 10)
-#
-#
-#            if self.oxygen >= 0:
-#                return self.oxygen
+        self.disp0 = ttk.Label(root, text="Oxygen level: ")
+        self.disp0.grid(column=0, row=2, sticky=E)
+
+        self.disp01 = ttk.Label(root, textvariable=self.disper)
+        self.disper.set(self.oxygen)
+        self.disp01.grid(column=1, row=2)
+
+        self.check = ttk.Checkbutton(root, text="haha")
+        self.check.grid(columnspan=2)
+
 
     def mined(self):
         if self.oxygen <= 0:
